@@ -8,7 +8,7 @@ import os
 import mysql.connector
 import re
 from typing import List
-
+from os import environ
 
 patterns = {
     'extract': lambda x, y: r'(?P<field>{})=[^{}]*'.format('|'.join(x), y),
@@ -128,11 +128,11 @@ def get_db() -> mysql.connector.connection.MySQLConnection:
         database.
     """
     # Get the environment variables for the database credentials
-    db_host = os.getenv("PERSONAL_DATA_DB_HOST", "localhost")
+    db_host = environ("PERSONAL_DATA_DB_HOST", "localhost")
     #  OR db_name = os.environ.get('PERSONAL_DATA_DB_USERNAME', 'root')
-    db_name = os.getenv("PERSONAL_DATA_DB_NAME", "")
-    db_user = os.getenv("PERSONAL_DATA_DB_USERNAME", "root")
-    db_pwd = os.getenv("PERSONAL_DATA_DB_PASSWORD", "")
+    db_name = environ("PERSONAL_DATA_DB_NAME", "")
+    db_user = environ("PERSONAL_DATA_DB_USERNAME", "root")
+    db_pwd = environ("PERSONAL_DATA_DB_PASSWORD", "")
     # Connect to the database using the obtained credentials
     connection = mysql.connector.connect(
         host=db_host,

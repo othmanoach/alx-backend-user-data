@@ -6,7 +6,7 @@ filter_datum = __import__("filtered_logger").filter_datum
 
 fields = ["password", "date_of_birth"]
 messages = [
-    2
+        "2"
 ]
 
 for message in messages:
